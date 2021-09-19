@@ -25,6 +25,10 @@
 
 
 <script>
+	const Logger = require('../logger')
+
+	const logger = new Logger().getLoggerInstance();
+
 	import { mapGetters, mapActions } from 'vuex';
 	import Button from '@/components/UI/Button.vue'
 
@@ -70,7 +74,8 @@
 				}
 
 				this.cleanTaskNew();
-				this.emitAddTask();
+				this.emitAddTask()
+				logger.logItem(task)
 			},
 			emitAddTask() {
 				this.$emit('add-task');
