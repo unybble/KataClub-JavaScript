@@ -32,6 +32,10 @@
 </template>
 
 <script>
+	const Logger = require('../logger')
+
+	const logger = new Logger().getLoggerInstance();
+
 	import { mapActions } from 'vuex';
 	import Button from '@/components/UI/Button.vue'
 
@@ -53,6 +57,7 @@
 			]),
 			changeTaskDone(task) {
 				task.status.done = !task.status.done;
+				logger.logItem(task.status.done);
 				this.updateTask(task);
 			},
 		}

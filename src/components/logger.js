@@ -4,7 +4,7 @@ class Logger {
     }
     logItem(itm){
         this.log.push(itm)
-        console.log("LOGGER: "+JSON.stringify(itm)+"/n");
+        console.log("LOGGER: "+JSON.stringify(itm));
     }
 }
 
