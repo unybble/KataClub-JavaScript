@@ -29,6 +29,8 @@
 
 	const logger = new Logger().getLoggerInstance();
 
+	import {StrategyManager, Urgent, Normal, Trivial} from './StrategyManager'
+
 	import { mapGetters, mapActions } from 'vuex';
 	import Button from '@/components/UI/Button.vue'
 
@@ -61,8 +63,25 @@
 				this.taskNew.name = "";
 			},
 			createTaskNew() {
+				const strategyManager = new StrategyManager();
+				const urgent = new Urgent();
+				const normal = new Normal();
+				const trivial = new Trivial();
+
 				const taskId = this.createTaskId;
 				const taskName = this.createTaskName;
+
+				if(taskName.toLowerCase().includes("urgent")){
+					strategyManager.strategy = urgent;
+					
+				}else if(taskName.toLowerCase().includes("meh")){
+					strategyManager.strategy = trivial;
+				}
+				else{
+					strategyManager.strategy = normal;
+				}
+
+				strategyManager.classify();
 
 				const task = {
 					id: taskId,
